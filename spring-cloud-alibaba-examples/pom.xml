@@ -37,7 +37,6 @@
         <module>rocketmq-example</module>
         <module>spring-cloud-bus-rocketmq-example</module>
         <module>schedulerx-example/schedulerx-simple-task-example</module>
-        <module>reksai_cloud</module>
     </modules>
 
     <build>
