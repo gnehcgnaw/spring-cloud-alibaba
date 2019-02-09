@@ -31,4 +31,23 @@
             </plugin>
         </plugins>
     </build>
+
+   <!-- <profiles>
+        <profile>
+            <id>reksai-cloud-dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>reksai-cloud-pro</id>
+            <properties>
+                <profiles.active>pro</profiles.active>
+            </properties>
+        </profile>
+    </profiles>-->
 </project>
