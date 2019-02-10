@@ -27,6 +27,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--nacos-config-->
         <dependency>
@@ -102,7 +108,11 @@
             <artifactId>user-api</artifactId>
             <version>0.2.2.BUILD-SNAPSHOT</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo-rpc-rest</artifactId>
+            <version>2.6.5</version>
+        </dependency>
     </dependencies>
 
     <build>
