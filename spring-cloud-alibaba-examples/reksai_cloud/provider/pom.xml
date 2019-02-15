@@ -20,6 +20,7 @@
     </properties>
     <modules>
         <module>provider-user-service</module>
+        <module>provider-order-service</module>
     </modules>
 
     <dependencyManagement>
