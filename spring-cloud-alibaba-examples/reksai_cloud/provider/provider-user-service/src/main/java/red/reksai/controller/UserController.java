@@ -1,6 +1,5 @@
 package red.reksai.controller;
 
-import entity.User;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import red.reksai.service.UserService;
