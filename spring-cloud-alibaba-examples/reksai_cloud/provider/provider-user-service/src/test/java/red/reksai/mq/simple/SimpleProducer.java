@@ -24,9 +24,10 @@ public class SimpleProducer {
          */
         defaultMQProducer.setRetryTimesWhenSendFailed(10);
         defaultMQProducer.start();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Message message = new Message("test-topic","simple",("simple-produce-"+i).getBytes(StandardCharsets.UTF_8));
             SendResult sendResult = defaultMQProducer.send(message,1000);
+
             System.out.println(sendResult);
         }
         defaultMQProducer.shutdown();
