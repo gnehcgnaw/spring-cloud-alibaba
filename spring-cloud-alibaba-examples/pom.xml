@@ -34,21 +34,16 @@
         <module>fescar-example/storage-service</module>
         <module>fescar-example/account-service</module>
         <module>acm-example/acm-local-example</module>
-        <module>rocketmq-example</module>
+        <module>rocketmq-example/rocketmq-consume-example</module>
+        <module>rocketmq-example/rocketmq-produce-example</module>
+        <module>sms-example</module>
         <module>spring-cloud-bus-rocketmq-example</module>
         <module>schedulerx-example/schedulerx-simple-task-example</module>
         <module>reksai_cloud</module>
+        <module>spring-cloud-alibaba-dubbo-examples</module>
     </modules>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>cobertura-maven-plugin</artifactId>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -58,16 +53,6 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <inherited>false</inherited>
-                <configuration>
-                    <skip>true</skip>
-                    <check/>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 

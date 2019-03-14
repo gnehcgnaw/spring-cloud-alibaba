@@ -17,8 +17,9 @@
 package org.springframework.cloud.alibaba.nacos.client;
 
 import com.alibaba.nacos.api.config.ConfigService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.alibaba.nacos.NacosConfigProperties;
 import org.springframework.cloud.alibaba.nacos.NacosPropertySourceRepository;
 import org.springframework.cloud.alibaba.nacos.refresh.NacosContextRefresher;
@@ -39,7 +40,8 @@ import java.util.List;
 @Order(0)
 public class NacosPropertySourceLocator implements PropertySourceLocator {
 
-	private static final Log log = LogFactory.getLog(NacosPropertySourceLocator.class);
+	private static final Logger log = LoggerFactory
+			.getLogger(NacosPropertySourceLocator.class);
 	private static final String NACOS_PROPERTY_SOURCE_NAME = "NACOS";
 	private static final String SEP1 = "-";
 	private static final String DOT = ".";
@@ -69,7 +71,6 @@ public class NacosPropertySourceLocator implements PropertySourceLocator {
 				timeout);
 		String name = nacosConfigProperties.getName();
 
-		String nacosGroup = nacosConfigProperties.getGroup();
 		String dataIdPrefix = nacosConfigProperties.getPrefix();
 		if (StringUtils.isEmpty(dataIdPrefix)) {
 			dataIdPrefix = name;
@@ -79,17 +80,12 @@ public class NacosPropertySourceLocator implements PropertySourceLocator {
 			dataIdPrefix = env.getProperty("spring.application.name");
 		}
 
-		List<String> profiles = Arrays.asList(env.getActiveProfiles());
-		nacosConfigProperties.setActiveProfiles(profiles.toArray(new String[0]));
-
-		String fileExtension = nacosConfigProperties.getFileExtension();
-
 		CompositePropertySource composite = new CompositePropertySource(
 				NACOS_PROPERTY_SOURCE_NAME);
 
 		loadSharedConfiguration(composite);
 		loadExtConfiguration(composite);
-		loadApplicationConfiguration(composite, nacosGroup, dataIdPrefix, fileExtension);
+		loadApplicationConfiguration(composite, dataIdPrefix, nacosConfigProperties, env);
 
 		return composite;
 	}
@@ -150,11 +146,15 @@ public class NacosPropertySourceLocator implements PropertySourceLocator {
 	}
 
 	private void loadApplicationConfiguration(
-			CompositePropertySource compositePropertySource, String nacosGroup,
-			String dataIdPrefix, String fileExtension) {
+			CompositePropertySource compositePropertySource, String dataIdPrefix,
+			NacosConfigProperties properties, Environment environment) {
+
+		String fileExtension = properties.getFileExtension();
+		String nacosGroup = properties.getGroup();
+
 		loadNacosDataIfPresent(compositePropertySource,
 				dataIdPrefix + DOT + fileExtension, nacosGroup, fileExtension, true);
-		for (String profile : nacosConfigProperties.getActiveProfiles()) {
+		for (String profile : environment.getActiveProfiles()) {
 			String dataId = dataIdPrefix + SEP1 + profile + DOT + fileExtension;
 			loadNacosDataIfPresent(compositePropertySource, dataId, nacosGroup,
 					fileExtension, true);
@@ -182,19 +182,19 @@ public class NacosPropertySourceLocator implements PropertySourceLocator {
 		}
 	}
 
-	private static void checkDataIdFileExtension(String[] sharedDataIdArry) {
+	private static void checkDataIdFileExtension(String[] dataIdArray) {
 		StringBuilder stringBuilder = new StringBuilder();
-		for (int i = 0; i < sharedDataIdArry.length; i++) {
+		for (int i = 0; i < dataIdArray.length; i++) {
 			boolean isLegal = false;
 			for (String fileExtension : SUPPORT_FILE_EXTENSION) {
-				if (sharedDataIdArry[i].indexOf(fileExtension) > 0) {
+				if (dataIdArray[i].indexOf(fileExtension) > 0) {
 					isLegal = true;
 					break;
 				}
 			}
 			// add tips
 			if (!isLegal) {
-				stringBuilder.append(sharedDataIdArry[i] + ",");
+				stringBuilder.append(dataIdArray[i] + ",");
 			}
 		}
 

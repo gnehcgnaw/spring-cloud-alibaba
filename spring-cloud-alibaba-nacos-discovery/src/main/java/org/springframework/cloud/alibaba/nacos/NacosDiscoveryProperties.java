@@ -45,7 +45,7 @@ import static com.alibaba.nacos.api.PropertyKeyConst.*;
 @ConfigurationProperties("spring.cloud.nacos.discovery")
 public class NacosDiscoveryProperties {
 
-	private static final Logger LOGGER = LoggerFactory
+	private static final Logger log = LoggerFactory
 			.getLogger(NacosDiscoveryProperties.class);
 
 	/**
@@ -63,6 +63,11 @@ public class NacosDiscoveryProperties {
 	 * namespace, separation registry of different environments.
 	 */
 	private String namespace;
+
+	/**
+	 * watch delay,duration to pull new service from nacos server.
+	 */
+	private long watchDelay = 5000;
 
 	/**
 	 * nacos naming log file name
@@ -149,6 +154,9 @@ public class NacosDiscoveryProperties {
 		}
 
 		serverAddr = Objects.toString(serverAddr, "");
+		if (serverAddr.lastIndexOf("/") != -1) {
+			serverAddr = serverAddr.substring(0, serverAddr.length() - 1);
+		}
 		endpoint = Objects.toString(endpoint, "");
 		namespace = Objects.toString(namespace, "");
 		logName = Objects.toString(logName, "");
@@ -319,16 +327,25 @@ public class NacosDiscoveryProperties {
 		this.namingLoadCacheAtStart = namingLoadCacheAtStart;
 	}
 
+	public long getWatchDelay() {
+		return watchDelay;
+	}
+
+	public void setWatchDelay(long watchDelay) {
+		this.watchDelay = watchDelay;
+	}
+
 	@Override
 	public String toString() {
 		return "NacosDiscoveryProperties{" + "serverAddr='" + serverAddr + '\''
 				+ ", endpoint='" + endpoint + '\'' + ", namespace='" + namespace + '\''
-				+ ", logName='" + logName + '\'' + ", service='" + service + '\''
-				+ ", weight=" + weight + ", clusterName='" + clusterName + '\''
-				+ ", metadata=" + metadata + ", registerEnabled=" + registerEnabled
-				+ ", ip='" + ip + '\'' + ", networkInterface='" + networkInterface + '\''
-				+ ", port=" + port + ", secure=" + secure + ", accessKey='" + accessKey
-				+ ", namingLoadCacheAtStart=" + namingLoadCacheAtStart + '\''
+				+ ", watchDelay=" + watchDelay + ", logName='" + logName + '\''
+				+ ", service='" + service + '\'' + ", weight=" + weight
+				+ ", clusterName='" + clusterName + '\'' + ", namingLoadCacheAtStart='"
+				+ namingLoadCacheAtStart + '\'' + ", metadata=" + metadata
+				+ ", registerEnabled=" + registerEnabled + ", ip='" + ip + '\''
+				+ ", networkInterface='" + networkInterface + '\'' + ", port=" + port
+				+ ", secure=" + secure + ", accessKey='" + accessKey + '\''
 				+ ", secretKey='" + secretKey + '\'' + '}';
 	}
 
@@ -380,13 +397,14 @@ public class NacosDiscoveryProperties {
 		properties.put(CLUSTER_NAME, clusterName);
 		properties.put(NAMING_LOAD_CACHE_AT_START, namingLoadCacheAtStart);
 
-        try {
-            namingService = NacosFactory.createNamingService(properties);
-        } catch (Exception e) {
-			LOGGER.error("create naming service error!properties={},e=,", this, e);
+		try {
+			namingService = NacosFactory.createNamingService(properties);
+		}
+		catch (Exception e) {
+			log.error("create naming service error!properties={},e=,", this, e);
 			return null;
 		}
-        return namingService;
+		return namingService;
 	}
 
 }
