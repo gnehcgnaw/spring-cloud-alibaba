@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>spring-cloud-dependencies-parent</artifactId>
@@ -20,7 +20,7 @@
         <sentinel.version>1.4.2</sentinel.version>
         <oss.version>3.1.0</oss.version>
         <fescar.version>0.2.3</fescar.version>
-        <nacos.client.version>1.0.0-RC1</nacos.client.version>
+        <nacos.client.version>1.0.0-RC2</nacos.client.version>
         <nacos.config.version>0.8.0</nacos.config.version>
         <acm.version>1.0.8</acm.version>
         <ans.version>1.0.1</ans.version>
@@ -188,22 +188,7 @@
 
             <dependency>
                 <groupId>com.alibaba.fescar</groupId>
-                <artifactId>fescar-core</artifactId>
-                <version>${fescar.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.fescar</groupId>
-                <artifactId>fescar-common</artifactId>
-                <version>${fescar.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.fescar</groupId>
                 <artifactId>fescar-spring</artifactId>
-                <version>${fescar.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.fescar</groupId>
-                <artifactId>fescar-rm-datasource</artifactId>
                 <version>${fescar.version}</version>
             </dependency>
 
@@ -392,6 +377,14 @@
                 <artifactId>spring-cloud-starter-alicloud-sms</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <!-- Dubbo -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-dubbo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
 
             <!-- Testing Dependencies -->
 
