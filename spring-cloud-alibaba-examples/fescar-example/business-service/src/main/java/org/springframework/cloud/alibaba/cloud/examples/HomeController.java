@@ -34,7 +34,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * 交易
  * @author xiaojing
+ *
  */
 @RestController
 public class HomeController {
@@ -58,6 +60,14 @@ public class HomeController {
 		this.storageService = storageService;
 	}
 
+	/**
+	 * 购买商品
+	 * 		1. 修改库存数量
+	 * 		2. 完成订单操作，
+	 * 				1. 将购买记录存储到order表中
+	 * 				2. 修改账目金额
+	 * @return
+	 */
 	@GlobalTransactional(timeoutMills = 300000, name = "spring-cloud-demo-tx")
 	@RequestMapping(value = "/fescar/rest", method = RequestMethod.GET, produces = "application/json")
 	public String rest() {
@@ -97,7 +107,6 @@ public class HomeController {
 	@GlobalTransactional(timeoutMills = 300000, name = "spring-cloud-demo-tx")
 	@RequestMapping(value = "/fescar/feign", method = RequestMethod.GET, produces = "application/json")
 	public String feign() {
-
 		String result = storageService.storage(COMMODITY_CODE, ORDER_COUNT);
 
 		if (!SUCCESS.equals(result)) {

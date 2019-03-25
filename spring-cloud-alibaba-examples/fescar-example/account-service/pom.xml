@@ -12,6 +12,7 @@
     <artifactId>account-service</artifactId>
 
     <dependencies>
+        <!--fescar-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-fescar</artifactId>

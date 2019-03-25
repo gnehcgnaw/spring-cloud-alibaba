@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * 账目服务
  * @author xiaojing
  */
 @RestController
@@ -45,10 +46,18 @@ public class AccountController {
 		this.random = new Random();
 	}
 
+	/**
+	 * 根据用户ID和变化金额修改账户金额
+	 * @param userId
+	 * @param money
+	 * @return
+	 */
 	@RequestMapping(value = "/account", method = RequestMethod.POST, produces = "application/json")
 	public String account(String userId, int money) {
 		LOGGER.info("Account Service ... xid: " + RootContext.getXID());
 
+
+		//使用 Random.nextBoolean() 的方式来随机抛出异常,模拟了在服务调用时随机发生异常的场景
 		if (random.nextBoolean()) {
 			throw new RuntimeException("this is a mock Exception");
 		}

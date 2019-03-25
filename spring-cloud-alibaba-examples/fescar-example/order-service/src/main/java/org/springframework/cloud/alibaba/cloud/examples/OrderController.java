@@ -62,10 +62,20 @@ public class OrderController {
         this.random = new Random();
     }
 
+    /**
+     * 购买商品
+     *      1. 请求账目服务，修改指定金额账目；${@link org.springframework.cloud.alibaba.cloud.examples.AccountController#account(String, int)}
+     *      2. 将购买的商品记录到订单表
+     * @param userId    用户ID
+     * @param commodityCode     商品编码
+     * @param orderCount    订单数量
+     * @return
+     */
     @RequestMapping(value = "/order", method = RequestMethod.POST, produces = "application/json")
     public String order(String userId, String commodityCode, int orderCount) {
         LOGGER.info("Order Service Begin ... xid: " + RootContext.getXID());
 
+        //计算订单金额
         int orderMoney = calculate(commodityCode, orderCount);
 
         invokerAccountService(orderMoney);
@@ -108,6 +118,13 @@ public class OrderController {
         return FAIL;
     }
 
+    /**
+     * 计算订单金额
+     *
+     * @param commodityId   商品编码
+     * @param orderCount    订单数量
+     * @return
+     */
     private int calculate(String commodityId, int orderCount) {
         return 2 * orderCount;
     }

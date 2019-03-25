@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * 商品库存
  * @author xiaojing
  */
 @RestController
@@ -43,6 +44,12 @@ public class StorageController {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	/**
+	 * 根据购买的对应商品的编码和数量，修改库存数
+	 * @param commodityCode
+	 * @param count
+	 * @return
+	 */
 	@RequestMapping(value = "/storage/{commodityCode}/{count}", method = RequestMethod.GET, produces = "application/json")
 	public String echo(@PathVariable String commodityCode, @PathVariable int count) {
 		LOGGER.info("Storage Service Begin ... xid: " + RootContext.getXID());
