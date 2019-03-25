@@ -28,7 +28,7 @@
 
 **注意**： 实际上，Fescar 支持不同的应用使用完全不相干的数据库，但是这里为了简单地演示一个原理，所以我们选择了只使用一个数据库。
 
-将 `account-server`、`order-service`、`storage-service` 这三个应用中的 resources 目录下的 `application.properties` 文件中的如下配置修改成你运行环境中的实际配置。
+将 `account-service`、`order-service`、`storage-service` 这三个应用中的 resources 目录下的 `application.properties` 文件中的如下配置修改成你运行环境中的实际配置。
 
 ```
 mysql.server.ip=your mysql server ip address
@@ -115,7 +115,7 @@ sh fescar-server.sh 8091 ~/fescar/data/
 
 ## 运行示例
 
-分别运行 `account-server`、`order-service`、`storage-service` 和 `business-service` 这三个应用的 Main 函数，启动示例。
+分别运行 `account-service`、`order-service`、`storage-service` 和 `business-service` 这三个应用的 Main 函数，启动示例。
 
 启动示例后，通过 HTTP 的 GET 方法访问如下两个 URL，可以分别验证在 `business-service` 中 通过 RestTemplate 和 FeignClient 调用其他服务的场景。
 
@@ -129,7 +129,7 @@ http://127.0.0.1:18081/fescar/rest
 
 ### Xid 信息是否成功传递
 
-在 `account-server`、`order-service` 和 `storage-service` 三个 服务的 Controller 中，第一个执行的逻辑都是输出 RootContext 中的 Xid 信息，如果看到都输出了正确的 Xid 信息，即每次都发生变化，且同一次调用中所有服务的 Xid 都一致。则表明 Fescar 的 Xid 的传递和还原是正常的。
+在 `account-service`、`order-service` 和 `storage-service` 三个 服务的 Controller 中，第一个执行的逻辑都是输出 RootContext 中的 Xid 信息，如果看到都输出了正确的 Xid 信息，即每次都发生变化，且同一次调用中所有服务的 Xid 都一致。则表明 Fescar 的 Xid 的传递和还原是正常的。
 
 ### 数据库中数据是否一致
 
