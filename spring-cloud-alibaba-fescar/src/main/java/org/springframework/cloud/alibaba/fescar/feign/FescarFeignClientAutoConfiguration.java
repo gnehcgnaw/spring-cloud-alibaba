@@ -38,6 +38,11 @@ import feign.Feign;
 @AutoConfigureBefore(FeignAutoConfiguration.class)
 public class FescarFeignClientAutoConfiguration {
 
+	/**
+	 * hystrix熔断方式
+	 * @param beanFactory
+	 * @return
+	 */
 	@Bean
 	@Scope("prototype")
 	@ConditionalOnClass(name = "com.netflix.hystrix.HystrixCommand")
@@ -45,7 +50,11 @@ public class FescarFeignClientAutoConfiguration {
 	Feign.Builder feignHystrixBuilder(BeanFactory beanFactory) {
 		return FescarHystrixFeignBuilder.builder(beanFactory);
 	}
-
+	/**
+	 * sentinel熔断方式
+	 * @param beanFactory
+	 * @return
+	 */
 	@Bean
 	@Scope("prototype")
 	@ConditionalOnClass(name = "com.alibaba.csp.sentinel.SphU")

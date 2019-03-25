@@ -42,6 +42,7 @@ public class BusinessApplication {
 		return new RestTemplate();
 	}
 
+	//如果写了url就表示直连，value就失效了
 	@FeignClient(value = "storage", url = "http://127.0.0.1:18082")
 	public interface StorageService {
 
@@ -50,7 +51,7 @@ public class BusinessApplication {
 				@RequestParam("count") int count);
 
 	}
-
+	//如果写了url就表示直连，value就失效了
 	@FeignClient(value = "order", url = "http://127.0.0.1:18083")
 	public interface OrderService {
 

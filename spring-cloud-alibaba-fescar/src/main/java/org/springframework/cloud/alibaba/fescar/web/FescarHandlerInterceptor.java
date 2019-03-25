@@ -21,12 +21,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fescar.core.context.RootContext;
 
+import feign.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
+ * 服务端如何处理
+ * 		（客户端如何处理${@link org.springframework.cloud.alibaba.fescar.feign.FescarFeignClient#execute(Request, Request.Options)}）
  * @author xiaojing
  *
  * Fescar HandlerInterceptor, Convert Fescar information into
@@ -51,6 +54,7 @@ public class FescarHandlerInterceptor implements HandlerInterceptor {
 		}
 
 		if (xid == null && rpcXid != null) {
+			//绑定xid
 			RootContext.bind(rpcXid);
 			if (log.isDebugEnabled()) {
 				log.debug("bind {} to RootContext", rpcXid);

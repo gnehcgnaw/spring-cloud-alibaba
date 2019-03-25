@@ -32,7 +32,12 @@ import feign.Request;
 import feign.Response;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
+ * FescarFeign执行客户端
+ * 		(服务端处理方式：${@link org.springframework.cloud.alibaba.fescar.web.FescarHandlerInterceptor#preHandle(HttpServletRequest, HttpServletResponse, Object)})
  * @author xiaojing
  */
 public class FescarFeignClient implements Client {
@@ -50,9 +55,16 @@ public class FescarFeignClient implements Client {
 		this.beanFactory = beanFactory;
 	}
 
+	/**
+	 * 执行请求
+	 * @param request
+	 * @param options
+	 * @return
+	 * @throws IOException
+	 */
 	@Override
 	public Response execute(Request request, Request.Options options) throws IOException {
-
+		//进行修改Request
 		Request modifiedRequest = getModifyRequest(request);
 
 		try {
@@ -64,7 +76,8 @@ public class FescarFeignClient implements Client {
 	}
 
 	private Request getModifyRequest(Request request) {
-
+		//TM向TC申请开启一个全局事务，全局事务创建成功并生产一个全局唯一的XID,XID会一直透传到下面的微服务中
+		//添加xid
 		String xid = RootContext.getXID();
 
 		if (StringUtils.isEmpty(xid)) {
@@ -76,6 +89,7 @@ public class FescarFeignClient implements Client {
 
 		List<String> fescarXid = new ArrayList<>();
 		fescarXid.add(xid);
+		//将xid添加到请求头中
 		headers.put(RootContext.KEY_XID, fescarXid);
 
 		return Request.create(request.method(), request.url(), headers, request.body(),
