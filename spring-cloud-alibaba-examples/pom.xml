@@ -32,6 +32,9 @@
         <module>fescar-example/order-service</module>
         <module>fescar-example/storage-service</module>
         <module>fescar-example/account-service</module>
+        <module>fescar-example/jta-sample/account1-service</module>
+        <module>fescar-example/jta-sample/account2-service</module>
+        <module>fescar-example/jta-sample/consumer-service</module>
         <module>acm-example/acm-local-example</module>
         <module>rocketmq-example/rocketmq-consume-example</module>
         <module>rocketmq-example/rocketmq-produce-example</module>
