@@ -9,8 +9,9 @@ import org.springframework.web.client.RestTemplate;
 /**
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-03-27 20:20
- * @since :
+ * @since : 1.0
  */
+@SuppressWarnings("all")
 @Service
 public class Account1Service {
     @Autowired
