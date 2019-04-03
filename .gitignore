@@ -31,4 +31,5 @@ hs_err_pid*
 .settings
 target
 .DS_Store
+*/oss-example/src/main/resources/application.properties
 
