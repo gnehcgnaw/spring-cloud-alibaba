@@ -29,7 +29,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * 服务端如何处理
- * 		（客户端如何处理${@link org.springframework.cloud.alibaba.fescar.feign.FescarFeignClient#execute(Request, Request.Options)}）
+ * 		（客户端如何处理${@link org.springframework.cloud.alibaba.seata.feign.SeataFeignClient#execute(Request, Request.Options)}）
  * @author xiaojing
  *
  * Fescar HandlerInterceptor, Convert Fescar information into
