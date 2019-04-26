@@ -19,7 +19,7 @@ package org.springframework.cloud.alibaba.seata.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fescar.core.context.RootContext;
+import io.seata.core.context.RootContext;
 
 import feign.Request;
 import org.slf4j.Logger;
@@ -32,10 +32,10 @@ import org.springframework.web.servlet.HandlerInterceptor;
  * 		（客户端如何处理${@link org.springframework.cloud.alibaba.seata.feign.SeataFeignClient#execute(Request, Request.Options)}）
  * @author xiaojing
  *
- * Fescar HandlerInterceptor, Convert Fescar information into
- * @see com.alibaba.fescar.core.context.RootContext from http request's header in
+ * Seata HandlerInterceptor, Convert Seata information into
+ * @see io.seata.core.context.RootContext from http request's header in
  * {@link org.springframework.web.servlet.HandlerInterceptor#preHandle(HttpServletRequest , HttpServletResponse , Object )},
- * And clean up Fescar information after servlet method invocation in
+ * And clean up Seata information after servlet method invocation in
  * {@link org.springframework.web.servlet.HandlerInterceptor#afterCompletion(HttpServletRequest, HttpServletResponse, Object, Exception)}
  */
 public class SeataHandlerInterceptor implements HandlerInterceptor {
@@ -45,7 +45,7 @@ public class SeataHandlerInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-			Object handler) throws Exception {
+			Object handler) {
 
 		String xid = RootContext.getXID();
 		String rpcXid = request.getHeader(RootContext.KEY_XID);
@@ -65,7 +65,7 @@ public class SeataHandlerInterceptor implements HandlerInterceptor {
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-			Object handler, Exception e) throws Exception {
+			Object handler, Exception e) {
 
 		String rpcXid = request.getHeader(RootContext.KEY_XID);
 

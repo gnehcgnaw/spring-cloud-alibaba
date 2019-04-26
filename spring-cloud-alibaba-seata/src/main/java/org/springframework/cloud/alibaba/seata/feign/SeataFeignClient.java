@@ -23,77 +23,61 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.fescar.core.context.RootContext;
-
-import org.springframework.beans.factory.BeanFactory;
-
 import feign.Client;
 import feign.Request;
 import feign.Response;
+import io.seata.core.context.RootContext;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
- * FescarFeign执行客户端
- * 		(服务端处理方式：${@link org.springframework.cloud.alibaba.fescar.web.FescarHandlerInterceptor#preHandle(HttpServletRequest, HttpServletResponse, Object)})
  * @author xiaojing
  */
 public class SeataFeignClient implements Client {
 
-	private final Client delegate;
-	private final BeanFactory beanFactory;
+    private final Client delegate;
+    private final BeanFactory beanFactory;
+    private static final int MAP_SIZE = 16;
 
-	SeataFeignClient(BeanFactory beanFactory) {
-		this.beanFactory = beanFactory;
-		this.delegate = new Client.Default(null, null);
-	}
+    SeataFeignClient(BeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
+        this.delegate = new Client.Default(null, null);
+    }
 
-	SeataFeignClient(BeanFactory beanFactory, Client delegate) {
-		this.delegate = delegate;
-		this.beanFactory = beanFactory;
-	}
+    SeataFeignClient(BeanFactory beanFactory, Client delegate) {
+        this.delegate = delegate;
+        this.beanFactory = beanFactory;
+    }
 
-	/**
-	 * 执行请求
-	 * @param request
-	 * @param options
-	 * @return
-	 * @throws IOException
-	 */
-	@Override
-	public Response execute(Request request, Request.Options options) throws IOException {
-		//进行修改Request
-		Request modifiedRequest = getModifyRequest(request);
+    @Override
+    public Response execute(Request request, Request.Options options) throws IOException {
 
-		try {
-			return this.delegate.execute(modifiedRequest, options);
-		}
-		finally {
+        Request modifiedRequest = getModifyRequest(request);
 
-		}
-	}
+        try {
+            return this.delegate.execute(modifiedRequest, options);
+        } finally {
 
-	private Request getModifyRequest(Request request) {
-		//TM向TC申请开启一个全局事务，全局事务创建成功并生产一个全局唯一的XID,XID会一直透传到下面的微服务中
-		//添加xid
-		String xid = RootContext.getXID();
+        }
+    }
 
-		if (StringUtils.isEmpty(xid)) {
-			return request;
-		}
+    private Request getModifyRequest(Request request) {
 
-		Map<String, Collection<String>> headers = new HashMap<>();
-		headers.putAll(request.headers());
+        String xid = RootContext.getXID();
 
-		List<String> fescarXid = new ArrayList<>();
-		fescarXid.add(xid);
-		//将xid添加到请求头中
-		headers.put(RootContext.KEY_XID, fescarXid);
+        if (StringUtils.isEmpty(xid)) {
+            return request;
+        }
 
-		return Request.create(request.method(), request.url(), headers, request.body(),
-				request.charset());
-	}
+        Map<String, Collection<String>> headers = new HashMap<>(MAP_SIZE);
+        headers.putAll(request.headers());
+
+        List<String> fescarXid = new ArrayList<>();
+        fescarXid.add(xid);
+        headers.put(RootContext.KEY_XID, fescarXid);
+
+        return Request.create(request.method(), request.url(), headers, request.body(),
+            request.charset());
+    }
 
 }
