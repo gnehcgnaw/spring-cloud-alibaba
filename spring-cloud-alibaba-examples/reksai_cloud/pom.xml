@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-alibaba-examples</artifactId>
-        <version>0.2.2.BUILD-SNAPSHOT</version>
+        <version>0.9.1.BUILD-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>red.reksai</groupId>
     <artifactId>reksai_cloud</artifactId>
-    <version>0.2.2.BUILD-SNAPSHOT</version>
+    <version>0.9.1.BUILD-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>reksai_cloud</name>
     <description>Demo project for Spring Boot</description>
@@ -53,27 +53,7 @@
 
         </dependencies>
     </dependencyManagement>
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>cobertura-maven-plugin</artifactId>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <inherited>false</inherited>
-                <configuration>
-                    <skip>true</skip>
-                    <check/>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
    <!-- <profiles>
         <profile>
             <id>reksai-cloud-dev</id>

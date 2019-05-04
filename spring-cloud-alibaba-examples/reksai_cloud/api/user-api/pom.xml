@@ -5,13 +5,13 @@
     <parent>
         <groupId>red.reksai</groupId>
         <artifactId>api</artifactId>
-        <version>0.2.2.BUILD-SNAPSHOT</version>
+        <version>0.9.1.BUILD-SNAPSHOT</version>
        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>red.reksai</groupId>
     <artifactId>user-api</artifactId>
-    <version>0.2.2.BUILD-SNAPSHOT</version>
+    <version>0.9.1.BUILD-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>user-api</name>
     <description>Demo project for Spring Boot</description>

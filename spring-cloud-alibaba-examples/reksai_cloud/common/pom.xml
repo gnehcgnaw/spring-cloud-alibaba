@@ -5,12 +5,12 @@
     <parent>
         <groupId>red.reksai</groupId>
         <artifactId>reksai_cloud</artifactId>
-        <version>0.2.2.BUILD-SNAPSHOT</version>
+        <version>0.9.1.BUILD-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>red.reksai</groupId>
     <artifactId>common</artifactId>
-    <version>0.2.2.BUILD-SNAPSHOT</version>
+    <version>0.9.1.BUILD-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>common</name>
     <description>Demo project for Spring Boot</description>
