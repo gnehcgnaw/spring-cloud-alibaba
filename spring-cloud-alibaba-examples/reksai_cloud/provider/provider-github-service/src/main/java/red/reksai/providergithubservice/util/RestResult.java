@@ -3,6 +3,7 @@ package red.reksai.providergithubservice.util;
 import java.io.Serializable;
 
 /**
+ * 返回数据结构
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-05-06 17:01
  * @since :

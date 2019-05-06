@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * GraphQLController 控制器
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-05-04 21:19
  * @since :
@@ -31,6 +32,14 @@ public class GraphQLController {
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * graphqlGET
+     * @param query
+     * @param operationName
+     * @param variablesJson
+     * @return Map<String, Object>
+     * @throws IOException
+     */
     @RequestMapping(value = "/graphql", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
     public Map<String, Object> graphqlGET(@RequestParam("query") String query,
@@ -45,7 +54,11 @@ public class GraphQLController {
         return executeGraphqlQuery(query, operationName, variables);
     }
 
-
+    /**
+     * graphql
+     * @param body
+     * @return Map<String, Object>
+     */
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/graphql", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin

@@ -4,12 +4,11 @@ package red.reksai.providergithubservice.graphql;
 import graphql.schema.DataFetcher;
 import org.springframework.stereotype.Component;
 /**
+ * GraphQL数据获取器
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-05-04 20:50
  * @since :
  */
-
-
 @Component
 public class GraphQLDataFetchers {
 

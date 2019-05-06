@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- *
+ * GitHubStars 控制器
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-05-06 16:01
  * @since :
@@ -37,7 +37,8 @@ public class GithubStarsController {
 
     /**
      * 获取指定用户的列表
-     * @return
+     * @param login
+     * @return  RestResult<List<GithubStarsInfo>>
      */
     @GetMapping("/get-all")
     public RestResult<List<GithubStarsInfo>> getAll(String login){
@@ -75,6 +76,11 @@ public class GithubStarsController {
 
     }
 
+    /**
+     * 将GitHub Stars列表导入到Excel
+     * @param login  用户名
+     * @return  RestResult<String>
+     */
     @GetMapping("/export-github-stars-excel")
     public RestResult<String> exportGithubStarsExcel(String login){
         log.debug("导出开始");

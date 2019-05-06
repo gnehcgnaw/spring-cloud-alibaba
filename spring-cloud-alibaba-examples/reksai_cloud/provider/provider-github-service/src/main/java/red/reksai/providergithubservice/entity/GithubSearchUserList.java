@@ -1,11 +1,11 @@
 package red.reksai.providergithubservice.entity;
 
-import com.alibaba.excel.metadata.BaseRowModel;
 
 import java.io.Serializable;
 import java.util.List;
 
 /**
+ * GitHub搜索用户返回entity
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-05-06 17:06
  * @since :

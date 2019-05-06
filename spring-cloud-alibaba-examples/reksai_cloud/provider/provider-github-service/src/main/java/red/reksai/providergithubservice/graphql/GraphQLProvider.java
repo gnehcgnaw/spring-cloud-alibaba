@@ -19,6 +19,7 @@ import java.net.URL;
 import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
 
 /**
+ * GraphQL提供者
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-05-04 20:44
  * @since :
