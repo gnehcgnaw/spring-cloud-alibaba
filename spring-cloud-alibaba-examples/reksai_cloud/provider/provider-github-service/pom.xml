@@ -74,7 +74,7 @@
 			Annotation-specified bean name 'graphQLController' for bean class
 			[graphql.spring.web.servlet.components.GraphQLController] conflicts with existing,
 			non-compatible bean definition of same name and
-			class [red.reksai.providergithubservice.graphql.GraphQLController]
+			class [red.reksai.providergithubservice.controller.GraphQLController]
 			错误
 		-->
 
@@ -82,13 +82,24 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<!--<dependency>
-			<groupId>com.graphql-java</groupId>
-			<artifactId>graphql-java-spring-boot-starter-webmvc</artifactId>
-			<version>1.0</version>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>graphql-java-spring-boot-starter-webmvc</artifactId>
+                    <version>1.0</version>
+                </dependency>
+                -->
+		<!--GsonForamte需要这个依赖-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+        </dependency>
+		<!--因为不涉及到业务的稳定性问题，所以选择了最新版的easyExcel依赖-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>easyexcel</artifactId>
+			<version>1.1.1</version>
 		</dependency>
-		-->
 
 	</dependencies>
 
