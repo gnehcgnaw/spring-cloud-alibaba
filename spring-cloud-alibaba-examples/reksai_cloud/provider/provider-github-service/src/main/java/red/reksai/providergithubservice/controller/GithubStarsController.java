@@ -55,6 +55,7 @@ public class GithubStarsController {
                 if(githubSearchUserList!=null){
                     ResponseEntity<List> list = restTemplate.getForEntity("https://api.github.com/users/"+githubSearchUserList.getItems().get(0).getLogin()+"/starred", List.class);
                     List<GithubStarsInfo> githubStarsInfoList = list.getBody();
+                    githubStarsInfoList.get(0).getArchive_url();
                     githubStarsInfoRestResult.setData(githubStarsInfoList);
                     githubStarsInfoRestResult.setMessage("查询成功");
                     githubStarsInfoRestResult.setCode(1);
@@ -100,8 +101,8 @@ public class GithubStarsController {
                 excelWriter.write(licenses,sheet1);
                 excelWriter.finish();
                 restResult.setCode(1);
-                restResult.setData(null);
-                restResult.setMessage("导出成功"+path);
+                restResult.setData(path);
+                restResult.setMessage("导出成功");
                 log.debug("导出完成");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
