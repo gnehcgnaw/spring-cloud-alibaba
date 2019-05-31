@@ -12,6 +12,7 @@
     <artifactId>schedulerx-simple-task-example</artifactId>
 
     <dependencies>
+        <!--使用spring-cloud-alibaba的分布式调度任务，需要导入schedulerx的依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alicloud-schedulerx</artifactId>

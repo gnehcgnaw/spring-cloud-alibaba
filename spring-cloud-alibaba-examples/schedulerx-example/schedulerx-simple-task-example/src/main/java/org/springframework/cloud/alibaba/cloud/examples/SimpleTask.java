@@ -23,6 +23,7 @@ import com.alibaba.edas.schedulerx.ScxSimpleJobContext;
 import com.alibaba.edas.schedulerx.ScxSimpleJobProcessor;
 
 /**
+ * 简单的调度任务，需要继承并实现其中的方法：${@link ScxSimpleJobProcessor#process(ScxSimpleJobContext)}
  * @author xiaolongzuo
  */
 public class SimpleTask implements ScxSimpleJobProcessor {

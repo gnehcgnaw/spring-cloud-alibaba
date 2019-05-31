@@ -15,6 +15,7 @@
 
     <dependencies>
 
+        <!--seata核心包-->
         <dependency>
             <groupId>io.seata</groupId>
             <artifactId>seata-spring</artifactId>
