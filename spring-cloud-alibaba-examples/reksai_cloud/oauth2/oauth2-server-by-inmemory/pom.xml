@@ -8,9 +8,9 @@
         <version>0.9.1.BUILD-SNAPSHOT</version>
     </parent>
     <groupId>red.reksai</groupId>
-    <artifactId>oauth2-server</artifactId>
+    <artifactId>oauth2-server-by-inmemory</artifactId>
     <version>0.9.1.BUILD-SNAPSHOT</version>
-    <name>oauth2-server</name>
+    <name>oauth2-server-by-inmemory</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
