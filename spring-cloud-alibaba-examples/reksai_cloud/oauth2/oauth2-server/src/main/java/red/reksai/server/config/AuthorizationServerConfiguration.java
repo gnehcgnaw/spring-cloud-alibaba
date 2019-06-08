@@ -7,6 +7,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 
 /**
+ * 基于内存存储令牌的认证服务器
+ *      继承并重写${@link AuthorizationServerConfigurerAdapter#configure(ClientDetailsServiceConfigurer)}方法
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-06-08 22:34
  * @since :
@@ -15,6 +17,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
+    /**
+     * spring security 5.0之后，必须使用密码加密模式，不然会出现"There is no PasswordEncoder mapped"错误。
+     *  因为在${@link WebSecurityConfiguration}中注入了@Bean passwordEncoder，所以这里可以直接使用。
+     */
     private BCryptPasswordEncoder passwordEncoder ;
 
     public AuthorizationServerConfiguration(BCryptPasswordEncoder passwordEncoder) {

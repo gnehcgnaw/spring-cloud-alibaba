@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
+ * 认证服务器安全配置
+ *      继承并重写${@link WebSecurityConfigurerAdapter#configure(AuthenticationManagerBuilder)}方法
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-06-08 22:39
  * @since :
@@ -17,6 +19,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true ,securedEnabled = true ,jsr250Enabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+    /**
+     * spring security 5.0之后，必须使用密码加密模式，不然会出现"There is no PasswordEncoder mapped"错误。
+     * @return
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return  new BCryptPasswordEncoder();
