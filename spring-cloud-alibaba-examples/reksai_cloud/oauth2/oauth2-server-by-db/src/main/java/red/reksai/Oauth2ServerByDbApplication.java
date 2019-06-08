@@ -10,10 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since :
  */
 @SpringBootApplication
-public class Oauth2ServerApplication {
+public class Oauth2ServerByDbApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Oauth2ServerApplication.class, args);
+        SpringApplication.run(Oauth2ServerByDbApplication.class, args);
     }
 
 }
