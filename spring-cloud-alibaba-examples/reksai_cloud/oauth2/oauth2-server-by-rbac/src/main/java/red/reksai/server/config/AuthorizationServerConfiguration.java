@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import javax.sql.DataSource;
 
 /**
- * 基于数据库存储令牌的认证服务器
+ * 基于rbac的数据库存储令牌的认证服务器
  *      继承并重写${@link AuthorizationServerConfigurerAdapter#configure(ClientDetailsServiceConfigurer)}方法
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-06-08 22:34
@@ -30,23 +30,30 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Bean
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource(){
+    public DataSource datasource() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    public ClientDetailsService jdbcClientDetailsService(){
-        return new JdbcClientDetailsService(dataSource());
+    public TokenStore tokenStore() {
+        return  new JdbcTokenStore(datasource());
     }
 
     @Bean
-    public TokenStore tokenStore() {
-        return  new JdbcTokenStore(dataSource());
+    public ClientDetailsService jdbcClientDetailService(){
+        return new JdbcClientDetailsService(datasource());
     }
 
+    /**
+     *
+     * @param clients
+     * @throws Exception
+     *
+     * 认证访问地址：http:ip:<<port>>/oauth/authorize?client_id=client&response_type=code
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(jdbcClientDetailsService());
+        clients.withClientDetails(jdbcClientDetailService());
     }
 
     @Override

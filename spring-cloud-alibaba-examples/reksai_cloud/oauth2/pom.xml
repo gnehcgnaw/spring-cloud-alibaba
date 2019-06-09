@@ -18,6 +18,7 @@
     <modules>
         <module>oauth2-server-by-inmemory</module>
         <module>oauth2-server-by-db</module>
+        <module>oauth2-server-by-rbac</module>
     </modules>
 
     <dependencyManagement>
