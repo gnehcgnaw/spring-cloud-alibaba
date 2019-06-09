@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.annotation.MapperScans;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * 认证服务器启动类
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date : 2019-06-08 22:39
  * @since :
  */
+@EnableDiscoveryClient
 @MapperScan(basePackages="red.reksai.server.mapper")
 @SpringBootApplication
 public class Oauth2ServerByRBACApplication {
