@@ -41,11 +41,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
      * spring security 5.0之后，必须使用密码加密模式，不然会出现"There is no PasswordEncoder mapped"错误。
      * @return
      */
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
-        return  new BCryptPasswordEncoder();
-    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService());
