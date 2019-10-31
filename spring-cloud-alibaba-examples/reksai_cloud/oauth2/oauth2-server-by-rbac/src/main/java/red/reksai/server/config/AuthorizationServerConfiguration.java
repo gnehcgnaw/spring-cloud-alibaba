@@ -19,6 +19,11 @@ import javax.sql.DataSource;
 /**
  * 基于rbac的数据库存储令牌的认证服务器
  *      继承并重写${@link AuthorizationServerConfigurerAdapter#configure(ClientDetailsServiceConfigurer)}方法
+ *
+ *
+ *      @see ClientDetailsServiceConfigurer 定义客户端详细信息的配置器，可以初始化客户端详细信息，也可以引用数据库中的配置。
+ *      @see  AuthorizationServerEndpointsConfigurer 定义授权和令牌端点以及令牌服务。
+ *
  * @author : <a href="mailto:gnehcgnaw@gmail.com">gnehcgnaw</a>
  * @date : 2019-06-08 22:34
  * @since :
@@ -43,6 +48,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public ClientDetailsService jdbcClientDetailService(){
         return new JdbcClientDetailsService(datasource());
     }
+
 
     /**
      *

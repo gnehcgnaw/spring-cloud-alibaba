@@ -23,6 +23,7 @@
         <module>common</module>
         <module>provider</module>
         <module>oauth2</module>
+        <module>getway</module>
     </modules>
     <dependencyManagement>
         <dependencies>

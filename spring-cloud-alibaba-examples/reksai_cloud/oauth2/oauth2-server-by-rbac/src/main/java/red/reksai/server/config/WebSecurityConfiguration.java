@@ -32,6 +32,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        // 设置默认的加密方式
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
     @Override
     protected UserDetailsService userDetailsService() {
         return userDetailsService;
